@@ -1,35 +1,27 @@
-
 package com.mycompany.parqueadero;
 
 import java.time.LocalDateTime;
 
-/**
- *
- * @author juan0
- */
-public abstract class vehiculo {
-    public String moto;
-    public String carro;
-    public String bicicleta;
-    public double horaActual;
-    public double horaIngreso;
-    
 
-    public vehiculo(String moto, String carro, String bicicleta, double horaActual,double horaIngreso ) {
-        this.moto = moto;
-        this.carro = carro;
-        this.bicicleta = bicicleta;
-        this.horaActual= horaActual;
+public abstract class vehiculo {
+    protected String tipoVehiculo;
+    protected LocalDateTime horaIngreso;
+    protected double costoPorMinuto;
+
+   
+    public vehiculo(String tipoVehiculo, LocalDateTime horaIngreso, double costoPorMinuto) {
+        this.tipoVehiculo = tipoVehiculo;
         this.horaIngreso = horaIngreso;
+        this.costoPorMinuto = costoPorMinuto;
     }
-    
-    
-    public void horaActual(){
-    LocalDateTime locaDate = LocalDateTime.now();
-    int horas  = locaDate.getHour();
-    int minutos = locaDate.getMinute();
-    int segundos = locaDate.getSecond();
+    //metodo para conseguir/ saber la hora acxtual basada en el dispositivo en el que se ejecuta
+    public LocalDateTime getHoraActual() {
+        return LocalDateTime.now();
     }
-    
-    
+    //toma la hora a la que se ingreso el vehiculo
+    public LocalDateTime getHoraIngreso() {
+        return horaIngreso;
+    }
+
+    public abstract void precio();
 }

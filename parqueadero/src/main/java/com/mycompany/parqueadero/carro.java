@@ -1,26 +1,21 @@
-
 package com.mycompany.parqueadero;
 
-/**
- *
- * @author juan0
- */
-public class carro extends vehiculo implements cobroCarro {
+import java.time.LocalDateTime;
+import java.time.Duration;
 
-    public carro(String moto, String carro, String bicicleta, double horaActual, double horaIngreso) {
-        super(moto, carro, bicicleta, horaActual, horaIngreso);
+public class carro extends vehiculo implements CobroVehiculo {
+
+    public carro(LocalDateTime horaIngreso) {
+        super("Carro", horaIngreso, 40.0); // Costo por minuto para el carro
     }
 
+    //sobre escribe el precio correspondiente a al costo del minuto por carro
     @Override
     public void precio() {
-    this.horaIngreso = horaIngreso;
-    double contadorMinutos=0;
-    double precioMinuto_Carro = 10;
-    for (double i =horaIngreso ;i<=horaActual;i++){
-        contadorMinutos++;
+        LocalDateTime horaActual = getHoraActual();
+        Duration duracion = Duration.between(horaIngreso, horaActual);
+        long minutos = duracion.toMinutes();
+        double valorAPagar = costoPorMinuto * minutos;
+        System.out.println("El valor a pagar por el carro es: $" + valorAPagar);
     }
-    double valorA_pagar = precioMinuto_Carro*contadorMinutos;
-    System.out.println("El Valor a pagar seria de : $"+valorA_pagar);
-    }
-    
 }
